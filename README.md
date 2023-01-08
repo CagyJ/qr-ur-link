@@ -5,6 +5,8 @@ Nowadays, QR codes exist everywhere and are pretty easy for people to scan to ge
 
 With this application, you can utilize it on your common tools' website, fork as your side projects, or just generate the link for your website!
 
+![preview](screenshot.png)
+
 ## Techniques
 - React
 - tailwindcss
