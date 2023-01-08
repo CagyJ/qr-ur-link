@@ -7,9 +7,13 @@ const Body = () => {
     const [url, setUrl] = React.useState('')
     const [size, setSize] = React.useState(300)
     const [loading, setLoading] = React.useState(false)
+    const [qrcode, setQrCode] = React.useState()
     const qrCodeRef = React.useRef()
 
     const generateQr = () => {
+        if (qrcode) {
+            qrcode.clear()
+        }
         setLoading(true)
         const wh = parseInt(size)
         console.log(qrCodeRef.current)
@@ -22,15 +26,14 @@ const Body = () => {
                 colorDark: "#000",
                 colorLight: "#fff"
             }
-            const qrCode = new QRCode(qrCodeRef.current, options)
-            console.log(qrCode)
+            setQrCode(new QRCode(qrCodeRef.current, options))
         }, 1000)
     }
 
     return (
         <main>
             <QrForm url={url} setUrl={setUrl} size={size} setSize={setSize} onSubmit={generateQr} />
-            <Result loading={loading} qrCodeRef={qrCodeRef} />
+            <QrResult loading={loading} qrCodeRef={qrCodeRef} />
         </main>
     )
 }
@@ -95,7 +98,7 @@ const QrForm = ({url, setUrl, size, setSize, onSubmit}) => {
     )
 }
 
-const Result = ({loading, qrCodeRef}) => {
+const QrResult = ({loading, qrCodeRef}) => {
 
     return (
         <div className="max-w-5xl m-auto flex flex-col text-center align-center justify-center mt-20">
