@@ -9,11 +9,17 @@ With this application, you can utilize it on your common tools' website, fork as
 - React
 - tailwindcss
 - [easyqrcodejs](https://www.npmjs.com/package/easyqrcodejs)
+- Canvas to png?
+  ```
+    canvasHTMLDivElement.toDataURL('image/png')
+  ```
 
 ## System Requirements
 - git v2.13 or greater
 - NodeJS 14 || 16 || 18
 - npm v8.16.0 or greater
+
+
 All of these must be available in your PATH. To verify things are set up properly, you can run this:
 
 ```

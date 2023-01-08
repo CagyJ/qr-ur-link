@@ -8,9 +8,11 @@ const Body = () => {
     const [size, setSize] = React.useState(300)
     const [loading, setLoading] = React.useState(false)
     const [qrcode, setQrCode] = React.useState()
+    const [downloadable, setDownloadable] = React.useState(false)
     const qrCodeRef = React.useRef()
 
     const generateQr = () => {
+        setDownloadable(false)
         if (qrcode) {
             qrcode.clear()
         }
@@ -27,14 +29,35 @@ const Body = () => {
                 colorLight: "#fff"
             }
             setQrCode(new QRCode(qrCodeRef.current, options))
+
+            setTimeout(() => {
+                console.log(qrCodeRef.current.firstChild)
+                setDownloadable(true)
+            }, 50)
         }, 1000)
     }
 
     return (
         <main>
             <QrForm url={url} setUrl={setUrl} size={size} setSize={setSize} onSubmit={generateQr} />
-            <QrResult loading={loading} qrCodeRef={qrCodeRef} />
+            <QrResult loading={loading} downloadable={downloadable} qrCodeRef={qrCodeRef} />
         </main>
+    )
+}
+
+const QrDownload = ({qrCodeRef}) => {
+    const canvasElem = qrCodeRef.current.firstChild
+    const saveUrl = canvasElem.toDataURL('image/png')
+
+    return (
+        <a 
+            id='save-link'
+            className='bg-black hover:bg-gray-600 text-white font-bold py-2 rounded w-1/3 m-auto my-5'
+            href={saveUrl}
+            download='qrcode.png'
+        >
+            Save 🌟
+        </a>
     )
 }
 
@@ -98,7 +121,7 @@ const QrForm = ({url, setUrl, size, setSize, onSubmit}) => {
     )
 }
 
-const QrResult = ({loading, qrCodeRef}) => {
+const QrResult = ({loading, downloadable, qrCodeRef}) => {
 
     return (
         <div className="max-w-5xl m-auto flex flex-col text-center align-center justify-center mt-20">
@@ -124,6 +147,7 @@ const QrResult = ({loading, qrCodeRef}) => {
             }
 
             <div className="m-auto" ref={qrCodeRef}></div>
+            {downloadable && <QrDownload qrCodeRef={qrCodeRef}/>}
         </div>
     )
 }
