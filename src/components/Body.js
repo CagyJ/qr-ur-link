@@ -52,7 +52,7 @@ const QrDownload = ({qrCodeRef}) => {
     return (
         <a 
             id='save-link'
-            className='bg-black hover:bg-gray-600 text-white font-bold py-2 rounded w-1/3 m-auto my-5'
+            className='bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 rounded w-1/3 m-auto my-5'
             href={saveUrl}
             download='qrcode.png'
         >
@@ -106,11 +106,11 @@ const QrForm = ({url, setUrl, size, setSize, onSubmit}) => {
                     <option value="600">600x600</option>
                 </select>
                 <button 
-                    className="bg-black rounded w-full text-white py-3 px-4 mt-5 hover:bg-gray-800" 
+                    className="bg-gray-800 rounded w-full text-white py-3 px-4 mt-5 hover:bg-black" 
                     type="submit"
                     disabled={!url.length}
                 >
-                    QR it! 🆒
+                    QR it! 🍯
                 </button>
             </form>
             </div>
