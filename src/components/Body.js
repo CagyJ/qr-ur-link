@@ -4,24 +4,26 @@ import QrForm from './QrForm'
 import QrResult from './QrResult'
 
 const Body = () => {
-    const [url, setUrl] = React.useState('')
-    const [size, setSize] = React.useState(300)
-    const [loading, setLoading] = React.useState(false)
-    const [qrcode, setQrCode] = React.useState()
-    const [downloadable, setDownloadable] = React.useState(false)
+    const [state, setState] = React.useState({
+        url: '',
+        size: 300,
+        loading: false,
+        downloadable: false,
+        qrcode: null,
+    })
     const qrCodeRef = React.useRef()
 
+    const {url, size, loading, downloadable, qrcode} = state
+
     const generateQr = () => {
-        setDownloadable(false)
+        setState({...state, downloadable: false, loading: true})
         if (qrcode) {
             qrcode.clear()
         }
-        setLoading(true)
 
         const wh = parseInt(size)
         setTimeout(() => {
-            setLoading(false)
-
+            
             const options = {
                 text: url,
                 width: wh,
@@ -29,13 +31,12 @@ const Body = () => {
                 colorDark: "#000",
                 colorLight: "#fff"
             }
-            setQrCode(new QRCode(qrCodeRef.current, options))
-
-            setTimeout(() => {
-                setDownloadable(true)
-            }, 50)
+            setState({...state, loading: false, downloadable: true, qrcode: new QRCode(qrCodeRef.current, options)})
         }, 1000)
     }
+
+    const setSize = size => setState({...state, size: size})
+    const setUrl = url => setState({...state, url: url})
 
     return (
         <main>
