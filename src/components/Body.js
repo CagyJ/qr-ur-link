@@ -1,3 +1,4 @@
+import QRCode from 'easyqrcodejs'
 import React from "react"
 import getQr from "../imgs/get_qr.png"
 
@@ -6,15 +7,30 @@ const Body = () => {
     const [url, setUrl] = React.useState('')
     const [size, setSize] = React.useState(300)
     const [loading, setLoading] = React.useState(false)
+    const qrCodeRef = React.useRef()
 
     const generateQr = () => {
         setLoading(true)
+        const wh = parseInt(size)
+        console.log(qrCodeRef.current)
+        setTimeout(() => {
+            setLoading(false)
+            const options = {
+                text: url,
+                width: wh,
+                height: wh,
+                colorDark: "#000",
+                colorLight: "#fff"
+            }
+            const qrCode = new QRCode(qrCodeRef.current, options)
+            console.log(qrCode)
+        }, 1000)
     }
 
     return (
         <main>
             <QrForm url={url} setUrl={setUrl} size={size} setSize={setSize} onSubmit={generateQr} />
-            <Result loading={loading} />
+            <Result loading={loading} qrCodeRef={qrCodeRef} />
         </main>
     )
 }
@@ -64,7 +80,7 @@ const QrForm = ({url, setUrl, size, setSize, onSubmit}) => {
                     <option value="600">600x600</option>
                 </select>
                 <button 
-                    className="bg-gray-600 rounded w-full text-white py-3 px-4 mt-5 hover:bg-black" 
+                    className="bg-black rounded w-full text-white py-3 px-4 mt-5 hover:bg-gray-800" 
                     type="submit"
                     disabled={!url.length}
                 >
@@ -79,12 +95,11 @@ const QrForm = ({url, setUrl, size, setSize, onSubmit}) => {
     )
 }
 
-const Result = ({loading}) => {
+const Result = ({loading, qrCodeRef}) => {
 
     return (
         <div className="max-w-5xl m-auto flex flex-col text-center align-center justify-center mt-20">
-            {loading && 
-                /* Spinner */
+            {loading &&
                 <div id="spinner" role="status">
                     <svg
                         className="inline mr-2 w-24 h-24 text-gray-200 animate-spin dark:text-gray-600 fill-indigo-200"
@@ -104,10 +119,8 @@ const Result = ({loading}) => {
                     <span className="sr-only">Loading...</span>
                 </div>
             }
-            
 
-            {/* QR Code output */}
-            <div className="m-auto" id="qrcode"></div>
+            <div className="m-auto" ref={qrCodeRef}></div>
         </div>
     )
 }

@@ -8,7 +8,7 @@ With this application, you can utilize it on your common tools' website, fork as
 ## Techniques
 - React
 - tailwindcss
-- [qrcodejs](https://github.com/davidshimjs/qrcodejs) (NOW) => [easyqrcodejs](https://www.npmjs.com/package/easyqrcodejs) (Later)
+- [easyqrcodejs](https://www.npmjs.com/package/easyqrcodejs)
 
 ## System Requirements
 - git v2.13 or greater
@@ -41,3 +41,7 @@ To get the app up and running, run:
 npm start
 ```
 This should open your browser and be on localhost:3000
+
+
+## TODO
+- *Warning: div: `ref` is not a prop.* needs to be fixed!
