@@ -52,4 +52,3 @@ This should open your browser and be on localhost:3000
 
 
 ## TODO
-- *Warning: div: `ref` is not a prop.* needs to be fixed!
