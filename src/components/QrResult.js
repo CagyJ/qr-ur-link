@@ -3,7 +3,7 @@ import DownloadButton from "./DownloadButton"
 const QrResult = ({loading, downloadable, qrCodeRef}) => {
 
     return (
-        <div className="max-w-5xl m-auto flex flex-col text-center align-center justify-center mt-20">
+        <div className="max-w-5xl m-auto flex flex-col text-center align-center justify-center mt-10">
             {loading &&
                 <div id="spinner" role="status">
                     <svg

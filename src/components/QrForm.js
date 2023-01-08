@@ -1,4 +1,4 @@
-import getQr from "../imgs/get_qr.png"
+import GetQr from "../imgs/get_qr.png"
 
 const QrForm = ({url, setUrl, size, setSize, onSubmit}) => {
     
@@ -10,13 +10,13 @@ const QrForm = ({url, setUrl, size, setSize, onSubmit}) => {
     return (
         <div className="flex flex-col-reverse align-center justify-center p-10 m-auto 
                     md:max-w-4xl md:flex-row">
-            <div className="w-full md:w-2/3 mr-24">
-            <h1 className="text-3xl font-bold mb-5 md:text-4xl">
-                QR Your Link
-            </h1>
-            <p className="mb-4">
-                QR allows other people to access your website simple and quickly!
-            </p>
+            <div className="w-full md:w-2/3 mr-24 mt-10">
+                <h1 className="text-3xl font-bold mb-5 md:text-4xl">
+                    QR Your Link
+                </h1>
+                <p className="mb-4">
+                    QR allows other people to access your website simple and quickly!
+                </p>
             <p>
                 Enter your URL below to generate a QR code and download it.
             </p>
@@ -52,7 +52,7 @@ const QrForm = ({url, setUrl, size, setSize, onSubmit}) => {
             </form>
             </div>
             <div className="w-full md:w-1/3 self-center">
-            <img src={getQr} alt="get qr" className="w-1/2 m-auto md:w-full" />
+                <img src={GetQr} alt="get qr" className="w-1/2 m-auto md:w-full" />
             </div>
         </div>
     )
